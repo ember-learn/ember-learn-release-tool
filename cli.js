@@ -11,6 +11,7 @@ const pkg = JSON.parse(
 
 import guides from './projects/guides.js';
 import guidesSearch from './projects/guides-search.js';
+import glitch from './projects/glitch.js';
 
 program
   .name(pkg.name)
@@ -27,7 +28,7 @@ program
   .action((args, commandOptions) =>
     guides(args, {
       ...program.opts(),
-      ...commandOptions,
+      ...commandOptions.opts(),
     }),
   );
 
@@ -37,8 +38,19 @@ program
   .action((args, commandOptions) =>
     guidesSearch(args, {
       ...program.opts(),
-      ...commandOptions,
+      ...commandOptions.opts(),
     }),
+  );
+
+program
+  .command('glitch')
+  .description('Update the Glitch starter pack')
+  .requiredOption('-v, --version <version>', `Set this to be the version you're trying to release`)
+  .action((args, commandOptions) => 
+    glitch(args, {
+      ...program.opts(),
+      ...commandOptions.opts(),
+    })
   );
 
 program.parse();

@@ -5,7 +5,7 @@ import { execaCommand } from 'execa';
  * @param {string} command
  * @param {boolean} dryRun
  */
-export function dryExeca(command, dryRun = true) {
+export function dryExeca(command, dryRun = true, options) {
   if (dryRun) {
     console.log(`🌵 Dry run: '${command}'`);
   } else {
@@ -14,6 +14,7 @@ export function dryExeca(command, dryRun = true) {
       preferLocal: true,
       stdout: 'inherit',
       stdin: 'inherit',
+      ...options,
     });
   }
 }
